@@ -12,3 +12,5 @@ class Emojis:
     FAIL = '❌'
     
     ALLERT = '⚠️'
+    
+    ARROW_RIGHT = '➡️'
