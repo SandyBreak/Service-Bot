@@ -11,7 +11,7 @@ from models.table_models.user import User
 
 from services.postgres.database import get_async_session
 
-from exceptions.errors import UserNotRegError, RegistrationError, AccessDeniedError
+from exceptions.errors import UserNotRegError, AccessDeniedError
 
 
 class UserService:
@@ -44,7 +44,7 @@ class UserService:
     
     
     @staticmethod
-    async def init_user(user_id: int, nickname: str, full_name: str, fio: str) -> None:
+    async def init_user(user_id: int, nickname: str, full_name: str) -> None:
         """
         Регистрация пользователя, сохранение:
             1. ID Аккаунта
@@ -74,8 +74,7 @@ class UserService:
                     session.add(new_user)
                     await session.commit()
             except SQLAlchemyError as e:
-                logging.error(f"Ошибка первичной регистрации пользователя: {e}")
-                raise RegistrationError from e
+                logging.error(f"Ошибка первичной регистрации пользователя с id_tg {user_id}: {e}")
     
 
     @staticmethod
