@@ -1,6 +1,7 @@
 # -*- coding: UTF-8 -*-
 
 from sqlalchemy import Column, Integer, BigInteger
+
 from .base import Base
 
 
