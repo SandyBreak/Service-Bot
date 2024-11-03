@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-from sqlalchemy import Column, Integer, ForeignKey, String, JSON
+from sqlalchemy import Column, Integer, ForeignKey, String, JSON, DateTime
 from sqlalchemy.orm import relationship
 
 from .base import Base
@@ -12,7 +12,9 @@ class CreatedRequests(Base):
     
     creator_id = Column(Integer, ForeignKey('users.id'))
     user = relationship("User", back_populates="created_requests")
-
+    
+    date_creation = Column(DateTime, nullable=True)
+    
     clinic_name = Column(String(length=512), nullable=True)
     city = Column(String(length=128), nullable=True)
     apparat_name = Column(String(length=512), nullable=True)
