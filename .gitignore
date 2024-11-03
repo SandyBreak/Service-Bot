@@ -1,7 +1,12 @@
+#DEV directories
 /venv
+/trash
+/downloads
 
+#ENV Files
 .env
 docker-compose.env 
 
+#Other
 .DS_Store
 __pycache__
