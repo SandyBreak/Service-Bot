@@ -23,7 +23,8 @@ class MinorOperations:
 			'photo': 'jpg'
 		}
 		try:
-			path_table = f'./downloads/{type_media}/problem_{type_media}{user_id}{datetime.now()}.{media_extension_map[type_media]}'
+			timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+			path_table = f'./downloads/{type_media}/problem_{type_media}_{user_id}_{timestamp}.{media_extension_map[type_media]}'
 			with open(path_table, 'wb') as f:
 				f.write(downloaded_media.read())
 			return path_table
