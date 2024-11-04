@@ -16,6 +16,7 @@ class User(Base):
     fullname = Column(String(length=64), nullable=True)
     
     date_reg = Column(DateTime, nullable=True)
+    message_thread_id = Column(BigInteger, nullable=True)
     access_flag = Column(BOOLEAN, nullable=True)
     
     created_requests = relationship("CreatedRequests", back_populates="user")

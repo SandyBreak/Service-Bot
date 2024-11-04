@@ -14,8 +14,9 @@ router = Router()
 async def bot_menu_and_start_message(message: Message, state: FSMContext, bot: Bot) -> None:
     with suppress(TelegramBadRequest):
         if (delete_message_id := (await state.get_data()).get('message_id')): await bot.delete_message(chat_id=message.chat.id, message_id=delete_message_id)
-    
-    await message.answer(MENU_MESSAGE, reply_markup=ReplyKeyboardRemove())
+    if message.chat.id == message.from_user.id:
+        await message.answer(MENU_MESSAGE, reply_markup=ReplyKeyboardRemove())
+        
     await state.clear()
 
     
@@ -24,5 +25,7 @@ async def bot_help(message: Message, state: FSMContext, bot: Bot) -> None:
     with suppress(TelegramBadRequest):
         if (delete_message_id := (await state.get_data()).get('message_id')): await bot.delete_message(chat_id=message.chat.id, message_id=delete_message_id)
     
-    await  message.answer(HELP_MESSAGE, reply_markup=ReplyKeyboardRemove())
+    if message.chat.id == message.from_user.id:
+        await  message.answer(HELP_MESSAGE, reply_markup=ReplyKeyboardRemove())
+        
     await state.clear()

@@ -11,7 +11,7 @@ from alembic import context
 sys.path.append(os.path.join(sys.path[0], 'src'))
 
 from src.models.table_models.user import User
-from src.models.table_models.admin_group import AdminGroup
+from src.models.table_models.active_group import ActiveGroup
 from src.models.table_models.temporary_requests_data import TemporaryRequestData
 
 from src.models.table_models.base import Base
