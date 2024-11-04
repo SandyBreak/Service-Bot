@@ -164,7 +164,7 @@ async def view_user_stats(callback: CallbackQuery, bot: Bot) -> None:
     users_list_str = 'Статистика пользователей:\n'
     
     for user in user_data:
-        users_list_str += f'ID: {user.id_tg}\nАдрес: {user.nickname}\nИмя: {user.fullname}\nДата регистрации: {(user.date_reg).strftime('%d.%m.%Y %H:%M')}\n\n'
+        users_list_str += f"ID: {user.id_tg}\nАдрес: {user.nickname}\nИмя: {user.fullname}\nДата регистрации: {(user.date_reg).strftime('%d.%m.%Y %H:%M')}\n\n"
             
     await callback.message.answer(users_list_str)
     await callback.answer()
