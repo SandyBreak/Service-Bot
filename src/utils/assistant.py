@@ -2,6 +2,7 @@
 
 from datetime import datetime
 import logging
+import os
 
 from aiogram.types import FSInputFile, InputMediaPhoto, InputMediaVideo
 
@@ -23,6 +24,10 @@ class MinorOperations:
 			'photo': 'jpg'
 		}
 		try:
+			os.makedirs(f'./downloads/', exist_ok=True)
+			type_media_directory = f'./downloads/{type_media}/'
+			os.makedirs(type_media_directory, exist_ok=True)
+   
 			timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
 			path_table = f'./downloads/{type_media}/problem_{type_media}_{user_id}_{timestamp}.{media_extension_map[type_media]}'
 			with open(path_table, 'wb') as f:
