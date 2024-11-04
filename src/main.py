@@ -9,7 +9,7 @@ from aiogram import Bot, Dispatcher
 from dotenv import load_dotenv
 
 from routers import commands, actions, create_new_request
-#from admin import admin_panel
+from admin import admin_panel
 from models.long_messages import DESCRIPTION, SHORT_DESCRIPTION
 from config import TELEGRAM_TOKEN
 
@@ -51,7 +51,7 @@ async def main():
     
     dp.include_router(commands.router)
     dp.include_router(create_new_request.router)
-    #dp.include_router(admin_panel.router)
+    dp.include_router(admin_panel.router)
     dp.include_router(actions.router)
     
     logging.warning("BOT STARTED")
