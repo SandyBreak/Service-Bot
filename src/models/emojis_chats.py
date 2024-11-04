@@ -14,3 +14,5 @@ class Emojis:
     ALLERT = '⚠️'
     
     ARROW_RIGHT = '➡️'
+    
+    ARROW_LEFT = '⬅️'

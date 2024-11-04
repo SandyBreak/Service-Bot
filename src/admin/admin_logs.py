@@ -46,8 +46,7 @@ async def send_log_message(message: Message, bot: Bot, message_log) -> None:
         '''
         Отправляем сообщение с информацией о пользователе и закрепляем его
         '''
-        fio = await UserService.get_user_fio(message.from_user.id)
-        new_user_message = await bot.send_message(chat_id=PRIMARY_GROUP_ID, text=f'ID пользователя: {message.from_user.id}\nТелеграмм имя пользователя: {message.from_user.full_name}\nФИО: {fio}\nАдрес пользователя: @{message.from_user.username}\nID темы: {new_topic.message_thread_id}', reply_to_message_id=new_topic.message_thread_id)
+        new_user_message = await bot.send_message(chat_id=PRIMARY_GROUP_ID, text=f'ID пользователя: {message.from_user.id}\nТелеграмм имя пользователя: {message.from_user.full_name}\nАдрес пользователя: @{message.from_user.username}\nID темы: {new_topic.message_thread_id}', reply_to_message_id=new_topic.message_thread_id)
         
         await bot.pin_chat_message(chat_id=PRIMARY_GROUP_ID, message_id=new_user_message.message_id)
         await bot.copy_message(chat_id=PRIMARY_GROUP_ID, from_chat_id=message_log.chat.id, message_id=message_log.message_id, message_thread_id=new_topic.message_thread_id, protect_content=None)
@@ -77,8 +76,7 @@ async def send_log_message(message: Message, bot: Bot, message_log) -> None:
                     '''
                     Отправляем сообщение с информацией о пользователе и закрепляем его
                     '''
-                    fio = await UserService.get_user_fio(message.from_user.id)
-                    new_user_message = await bot.send_message(chat_id=PRIMARY_GROUP_ID, text=f'ID пользователя: {message.from_user.id}\nТелеграмм имя пользователя: {message.from_user.full_name}\nФИО: {fio}\nАдрес пользователя: @{message.from_user.username}\nID темы: {new_topic.message_thread_id}', reply_to_message_id=new_topic.message_thread_id)
+                    new_user_message = await bot.send_message(chat_id=PRIMARY_GROUP_ID, text=f'ID пользователя: {message.from_user.id}\nТелеграмм имя пользователя: {message.from_user.full_name}\nАдрес пользователя: @{message.from_user.username}\nID темы: {new_topic.message_thread_id}', reply_to_message_id=new_topic.message_thread_id)
 
                     await bot.pin_chat_message(chat_id=PRIMARY_GROUP_ID, message_id=new_user_message.message_id)
                     await bot.copy_message(chat_id=PRIMARY_GROUP_ID, from_chat_id=message_log.chat.id, message_id=message_log.message_id, message_thread_id=new_topic.message_thread_id, protect_content=None)

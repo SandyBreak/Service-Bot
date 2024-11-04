@@ -6,6 +6,7 @@ import json
 from aiogram.enums.chat_member_status import ChatMemberStatus
 from aiogram.types import Message, CallbackQuery
 from aiogram import Router, Bot
+
 from models.user_keyboards import UserKeyboards
 
 from services.postgres.group_service import GroupService
