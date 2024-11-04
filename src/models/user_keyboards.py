@@ -65,7 +65,7 @@ class UserKeyboards:
         """
         builder = InlineKeyboardBuilder()
         
-        builder.row(InlineKeyboardButton(text="Вернуться назад", callback_data=json.dumps({'key': 'back'}))) # Кнопка для возврата назад
+        builder.row(InlineKeyboardButton(text=f"{Emojis.ARROW_LEFT} Вернуться назад", callback_data=json.dumps({'key': 'back'}))) # Кнопка для возврата назад
         
         if type_keyboard != 'detailed_description' and 'detailed_description_append' and 'nameplate' and 'maintenance_date':
             memory_button = await CreateRequestService.get_data(user_id, type_keyboard)

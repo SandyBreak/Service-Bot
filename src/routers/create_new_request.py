@@ -208,7 +208,7 @@ async def get_contact(message: Message, state: FSMContext, bot: Bot) -> None:
     with suppress(TelegramBadRequest):
         if (delete_message_id := (await state.get_data()).get('message_id')): await bot.delete_message(chat_id=message.chat.id, message_id=delete_message_id)
 
-    if message.text == 'Вернуться назад':
+    if message.text == f'{Emojis.ARROW_LEFT} Вернуться назад':
         description_keyboard = await UserKeyboards.required_keyboard(message.from_user.id, 'description_problem')
         delete_message = await message.answer("Опишите вашу проблему:", reply_markup=description_keyboard.as_markup(resize_keyboard=True))
         next_state = CreateRequestStates.get_description_problem
