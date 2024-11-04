@@ -333,7 +333,7 @@ async def get_company_details(callback: CallbackQuery, state: FSMContext, bot: B
     data = json.loads(callback.data)
     
     if data['key'] == 'back':
-        type_keyboard  = 'detailed_description'
+        type_keyboard  = 'detailed_description_append'
         
         quantity_media = await CreateRequestService.get_data(callback.from_user.id, 'mediafiles')
         quantity_photo = len(quantity_media['photo'])
