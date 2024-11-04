@@ -315,8 +315,10 @@ async def get_detailed_description_mediafiles(message: Message, state: FSMContex
         
         await CreateRequestService.save_data(message.from_user.id, 'mediafiles', quantity_media)
         
-        company_details_keyboard = await UserKeyboards.optional_keyboard(message.from_user.id, 'detailed_description_append')     
-        delete_message = await message.answer(f"Прикреплено фото: {len(quantity_media['photo'])} шт.\nПрикреплено видео: {len(quantity_media['video'])} шт.\nВсего файлов: {(len(quantity_media['photo']) + len(quantity_media['video']))} из возможных 9 шт.", reply_markup=company_details_keyboard.as_markup(resize_keyboard=True, one_time_keyboard=True))
+        company_details_keyboard = await UserKeyboards.optional_keyboard(message.from_user.id, 'detailed_description_append')
+        quantity_photo = len(quantity_media['photo'])
+        quantity_video = len(quantity_media['video'])
+        delete_message = await message.answer(f"Прикреплено фото: {quantity_photo} шт.\nПрикреплено видео: {quantity_video} шт.\nВсего файлов: {quantity_photo + quantity_video} из возможных 9 шт.", reply_markup=company_details_keyboard.as_markup(resize_keyboard=True, one_time_keyboard=True))
     else:
         company_details_keyboard = await UserKeyboards.optional_keyboard(message.from_user.id, 'company_details')
         delete_message = await message.answer(f"{Emojis.ALLERT} Вы прикрепили максимум файлов! {Emojis.ALLERT}\nВведите реквизиты предприятия включая ИНН:", reply_markup=company_details_keyboard.as_markup(resize_keyboard=True, one_time_keyboard=True))
@@ -332,8 +334,12 @@ async def get_company_details(callback: CallbackQuery, state: FSMContext, bot: B
     
     if data['key'] == 'back':
         type_keyboard  = 'detailed_description'
+        
         quantity_media = await CreateRequestService.get_data(callback.from_user.id, 'mediafiles')
-        text = f'Отправьте фото или видео проблемы, если у вас несколько фото или видео, отправьте их по очереди.\n\nПрикреплено фото: {len(quantity_media['photo'])} шт.\nПрикреплено видео: {len(quantity_media['video'])} шт.\nВсего файлов: {(len(quantity_media['photo']) + len(quantity_media['video']))} из возможных 9 шт.\n\nДля сброса всех прикрепленных файлов нажмите кнопку {Emojis.ARROW_LEFT} Вернуться назад'
+        quantity_photo = len(quantity_media['photo'])
+        quantity_video = len(quantity_media['video'])
+        
+        text = f'Отправьте фото или видео проблемы, если у вас несколько фото или видео, отправьте их по очереди.\n\nПрикреплено фото: {quantity_photo} шт.\nПрикреплено видео: {quantity_video} шт.\nВсего файлов: {quantity_photo + quantity_video} из возможных 9 шт.\n\nДля сброса всех прикрепленных файлов нажмите кнопку {Emojis.ARROW_LEFT} Вернуться назад'
         next_state = CreateRequestStates.get_detailed_description_mediafiles
 
     elif data['key'] == 'skip' or 'memory':
