@@ -480,7 +480,7 @@ async def get_maintenance_date_and_send_request(callback: CallbackQuery, state: 
             delete_message = await bot.edit_message_text(chat_id=callback.message.chat.id, message_id=callback.message.message_id, text=f"{Emojis.SUCCESS}Ваша заявка упешно отправлена! {Emojis.SUCCESS}\nСкоро с вами свяжется технический специалист.")
             
             if request_message_reply: await send_log_message(callback, bot, request_message_reply)
-            if request_media_group: await send_log_message(callback, bot, request_media_group)
+            if request_media_group: await send_log_message(callback, bot, request_media_group[0])
             
             await state.clear()
         except Exception as e:
