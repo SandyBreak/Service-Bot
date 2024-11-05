@@ -475,7 +475,9 @@ async def get_maintenance_date_and_send_request(callback: CallbackQuery, state: 
 
             for secondary_group in SECONDARY_GROUPS_IDS:
                 request_message_reply = await bot.send_message(chat_id=secondary_group.group_id, text=request_message, parse_mode=ParseMode.HTML)
-                request_media_group = await bot.send_media_group(chat_id=secondary_group.group_id, media=request_media, reply_to_message_id=request_message_reply.message_id)
+                request_media_group = False
+                if request_media:
+                    request_media_group = await bot.send_media_group(chat_id=secondary_group.group_id, media=request_media, reply_to_message_id=request_message_reply.message_id)
         
             delete_message = await bot.edit_message_text(chat_id=callback.message.chat.id, message_id=callback.message.message_id, text=f"{Emojis.SUCCESS}Ваша заявка упешно отправлена! {Emojis.SUCCESS}\nСкоро с вами свяжется технический специалист.")
             
@@ -503,7 +505,9 @@ async def get_maintenance_date_and_send_request(message: Message, state: FSMCont
 
         for secondary_group in SECONDARY_GROUPS_IDS:
             request_message_reply = await bot.send_message(chat_id=secondary_group.group_id, text=request_message, parse_mode=ParseMode.HTML)
-            request_media_group = await bot.send_media_group(chat_id=secondary_group.group_id, media=request_media, reply_to_message_id=request_message_reply.message_id)
+            request_media_group = False
+            if request_media:
+                request_media_group = await bot.send_media_group(chat_id=secondary_group.group_id, media=request_media, reply_to_message_id=request_message_reply.message_id)
         
         if request_message_reply: await send_log_message(message, bot, request_message_reply)
         if request_media_group: await send_log_message(message, bot, request_media_group[0])
